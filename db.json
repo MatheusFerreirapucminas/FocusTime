@@ -21,17 +21,6 @@
       "password": "123456Ma",
       "foto": "https://res.cloudinary.com/dqmrubnvg/image/upload/v1750993163/a8l0sailoqbvfiih7zch.jpg",
       "dataCadastro": "2025-06-27T03:43:08.818Z"
-    },
-    {
-      "id": "fdef",
-      "nome": "NEGAO ZAP",
-      "idade": 45,
-      "cpf": "12345678910",
-      "telefone": "12345678910",
-      "email": "negaozap@gmail.com",
-      "password": "123456Ma",
-      "foto": "https://res.cloudinary.com/dqmrubnvg/image/upload/v1751080848/hz9bni4xkdgmgqfcmg25.avif",
-      "dataCadastro": "2025-06-28T03:21:22.333Z"
     }
   ],
   "tarefa": [
