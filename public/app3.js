@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const horarioInput = document.getElementById("horario");
     const calendario = document.getElementById("calendario");
     const mesAno = document.getElementById("mesAno");
-    const API_URL = "http://localhost:3000/eventos";
+    const API_URL = "https://focustime-gk06.onrender.com/eventos";
 
     const meses = [
         "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -203,7 +203,7 @@ const verTodosBtn = document.getElementById("verTodosBtn");
 let mostrandoTodos = false;
 
 
-const API_URL = "http://localhost:3000/eventos";
+const API_URL = "https://focustime-gk06.onrender.com/eventos";
 
 function carregarEventos() {
     eventosContainer.innerHTML = "";

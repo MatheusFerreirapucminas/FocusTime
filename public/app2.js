@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             console.log("Tarefa sendo enviada:", novaTarefa);
-            const resposta = await fetch('http://localhost:3000/tarefa', {
+            const resposta = await fetch('https://focustime-gk06.onrender.com/tarefa', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(novaTarefa)
@@ -72,13 +72,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const id = e.target.getAttribute('data-id');
 
         try {
-            const res = await fetch(`http://localhost:3000/tarefa/${id}`);
+            const res = await fetch(`https://focustime-gk06.onrender.com/tarefa/${id}`);
 
             if (!res.ok) throw new Error("Tarefa não encontrada no servidor.");
 
             const tarefa = await res.json();
 
-            const deleteRes = await fetch(`http://localhost:3000/tarefa/${id}`, {
+            const deleteRes = await fetch(`https://focustime-gk06.onrender.com/tarefa/${id}`, {
                 method: 'DELETE'
             });
 
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
         lista.innerHTML = '';
 
         try {
-            const resposta = await fetch('http://localhost:3000/tarefa');
+            const resposta = await fetch('https://focustime-gk06.onrender.com/tarefa');
             const tarefasAtivas = await resposta.json();
 
             if (tarefasAtivas.length === 0) {
