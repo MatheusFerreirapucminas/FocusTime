@@ -9,7 +9,8 @@
       "email": "matheushbf14@gmail.com",
       "password": "123456Ma",
       "foto": "https://res.cloudinary.com/dqmrubnvg/image/upload/v1750995730/k6pdjdh2pmjw4u4abipj.jpg",
-      "dataCadastro": "2025-06-24T21:08:14.339Z"
+      "dataCadastro": "2025-06-24T21:08:14.339Z",
+      "admin": true
     },
     {
       "id": "c041",
