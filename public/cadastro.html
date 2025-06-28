@@ -318,10 +318,18 @@
             const password = document.getElementById("password").value;
             const confirmPassword = document.getElementById("confirmPassword").value;
 
+            const senhaForte = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+            if (!senhaForte.test(password)) {
+                alert("A senha deve conter no mínimo 6 caracteres, incluindo ao menos uma letra maiúscula, uma letra minúscula e um número.");
+                return;
+            }
+
             if (password !== confirmPassword) {
                 alert("As senhas não coincidem!");
                 return;
             }
+
 
             const userData = {
                 nome:
@@ -376,6 +384,34 @@
                 console.error("Erro ao cadastrar:", err);
                 alert("Erro ao cadastrar. Tente novamente.");
             }
+        });
+
+        // Máscara de CPF
+        const cpfInput = document.getElementById("cpf");
+        cpfInput.addEventListener("input", function () {
+            let value = cpfInput.value.replace(/\D/g, ""); // Remove tudo que não for número
+            if (value.length > 11) value = value.slice(0, 11); // Limita a 11 dígitos
+
+            // Formata: 000.000.000-00
+            value = value.replace(/(\d{3})(\d)/, "$1.$2");
+            value = value.replace(/(\d{3})(\d)/, "$1.$2");
+            value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+            cpfInput.value = value;
+        });
+
+        // Máscara de Telefone
+        const phoneInput = document.getElementById("phone");
+        phoneInput.addEventListener("input", function () {
+            let value = phoneInput.value.replace(/\D/g, ""); // Remove não-dígitos
+
+            if (value.length > 11) value = value.slice(0, 11); // Limita a 11 dígitos
+
+            // Formata celular com DDD: (00) 00000-0000
+            if (value.length >= 2) value = value.replace(/^(\d{2})(\d)/, "($1) $2");
+            if (value.length >= 7) value = value.replace(/(\d{5})(\d)/, "$1-$2");
+
+            phoneInput.value = value;
         });
     </script>
 </body>
