@@ -9,13 +9,31 @@
 </head>
 
 <body class="bg-gray-100 p-6">
-    <h1 class="text-2xl font-bold mb-4">Painel do Administrador</h1>
-    <div id="usuariosContainer" class="space-y-4"></div>
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-2 text-center">Painel do Administrador</h1>
+        <p class="text-gray-600 text-center mb-6">Gerencie os usuários cadastrados no sistema</p>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead class="bg-gray-200 text-gray-700 text-left">
+                    <tr>
+                        <th class="p-3">ID</th>
+                        <th class="p-3">Nome</th>
+                        <th class="p-3">Email</th>
+                        <th class="p-3">Admin</th>
+                        <th class="p-3">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="usuariosContainer" class="text-gray-800"></tbody>
+            </table>
+        </div>
+    </div>
 
     <script>
         const BASE_URL = "https://focustime-9z8f.onrender.com";
         const container = document.getElementById("usuariosContainer");
 
+        // Verifica se é admin
         const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
         if (!usuarioLogado || !usuarioLogado.admin) {
@@ -33,24 +51,23 @@
                 container.innerHTML = "";
 
                 usuarios.forEach(usuario => {
-                    const card = document.createElement("div");
-                    card.className = "bg-white p-4 shadow-md rounded flex justify-between items-center";
+                    const linha = document.createElement("tr");
+                    linha.className = "border-b hover:bg-gray-100";
 
-                    card.innerHTML = `
-        <div>
-          <p><strong>ID:</strong> ${usuario.id}</p>
-          <p><strong>Email:</strong> ${usuario.email}</p>
-          <p><strong>Admin:</strong> ${usuario.admin ? "Sim" : "Não"}</p>
-        </div>
-        <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onclick="excluirUsuario(${usuario.id})">
-          Excluir
-        </button>
-      `;
+                    linha.innerHTML = `
+                <td class="p-3">${usuario.id}</td>
+                <td class="p-3">${usuario.nome}</td>
+                <td class="p-3">${usuario.email}</td>
+                <td class="p-3">${usuario.admin ? "Sim" : "Não"}</td>
+                <td class="p-3">
+                    <button onclick="excluirUsuario('${usuario.id}')" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Excluir</button>
+                </td>
+            `;
 
-                    container.appendChild(card);
+                    container.appendChild(linha);
                 });
             } catch (err) {
-                container.innerHTML = "<p class='text-red-500'>Erro ao carregar usuários.</p>";
+                container.innerHTML = `<tr><td colspan="5" class="p-4 text-red-500">Erro ao carregar usuários.</td></tr>`;
                 console.error("Erro:", err);
             }
         }
