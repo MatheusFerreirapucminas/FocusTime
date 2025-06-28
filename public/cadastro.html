@@ -340,7 +340,7 @@
             try {
                 // Verificações
                 const verificaEmail = await fetch(
-                    `https://focustime-2ha8.onrender.com/usuarios?email=${encodeURIComponent(
+                    `http://localhost:3000/usuarios?email=${encodeURIComponent(
                         userData.email
                     )}`
                 );
@@ -351,7 +351,7 @@
                 }
 
                 const verificaCPF = await fetch(
-                    `https://focustime-2ha8.onrender.com/usuarios?cpf=${encodeURIComponent(userData.cpf)}`
+                    `http://localhost:3000/usuarios?cpf=${encodeURIComponent(userData.cpf)}`
                 );
                 const cpfCheck = await verificaCPF.json();
                 if (cpfCheck.length > 0) {
@@ -360,7 +360,7 @@
                 }
 
                 // Cadastro
-                const res = await fetch("https://focustime-2ha8.onrender.com/usuarios", {
+                const res = await fetch("http://localhost:3000/usuarios", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
