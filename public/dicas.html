@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dicas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+    <style>
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dicas {
+            color: #222;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background-color: #fff3e6;
+            border-left: 6px solid #f77f00;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tip-card h3 {
+            margin-top: 0;
+            color: #ff6600;
+        }
+
+        .tip-card p {
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        #motivational-carousel {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        #motivational-carousel h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+
+        .carousel-container {
+            background-color: #fff3e6;
+            border: 1px solid #ff6600;
+            padding: 40px 30px;
+            border-radius: 15px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px #ff6600;
+            position: relative;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .carousel-content {
+            font-size: 1.5em;
+            color: #ff6600;
+            font-style: italic;
+            transition: opacity 0.5s ease-in-out;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- Logo -->
+        <div class="logo"><img src="images/Logo_TIAW.jpg" /><a href="index.html">FocusTime</a></div>
+
+        <!-- Menu -->
+        <nav>
+            <a href="index.html" class="active">HOME</a>
+            <a href="tarefas.html">TAREFAS</a>
+            <a href="agenda.html">AGENDA</a>
+        </nav>
+        <div class="icons">
+            <span class="icon"><a href="perfil.html" class="fas fa-user"></a></span>
+            <span class="icon"><a href="configuracoes.html" class="fas fa-cog"></a></span>
+            <span class="icon"><a href="dicas.html" class="fas fa-lightbulb"></a></span>
+        </div>
+    </header>
+
+    <section id="motivational-carousel">
+        <h2 style="color: #222;">Frases Motivacionais</h2>
+        <div class="carousel-container">
+            <div class="carousel-content" id="carousel-frases"></div>
+        </div>
+    </section>
+    <main>
+        <h1 class="dicas">Dicas para Gestão de Tempo</h1>
+
+        <div class="tips-grid">
+            <div class="tip-card">
+                <h3>1. Use a Técnica Pomodoro</h3>
+                <p>Trabalhe por 25 minutos e descanse por 5. Isso melhora o foco e evita a fadiga mental.</p>
+            </div>
+            <div class="tip-card">
+                <h3>2. Priorize Tarefas</h3>
+                <p>Organize suas tarefas por importância e urgência. Foque no que realmente importa primeiro.</p>
+            </div>
+            <div class="tip-card">
+                <h3>3. Defina Metas Diárias</h3>
+                <p>Estabeleça objetivos claros para o dia e revise ao final para acompanhar seu progresso.</p>
+            </div>
+            <div class="tip-card">
+                <h3>4. Evite Multitarefas</h3>
+                <p>Fazer várias coisas ao mesmo tempo reduz a produtividade. Foque em uma tarefa de cada vez.</p>
+            </div>
+            <div class="tip-card">
+                <h3>5. Faça Pausas Regulares</h3>
+                <p>Descansos curtos ajudam a manter a energia e a concentração ao longo do dia.</p>
+            </div>
+            <div class="tip-card">
+                <h3>6. Revise sua Agenda</h3>
+                <p>Reserve um momento ao fim do dia para revisar o que foi feito e planejar o próximo.</p>
+            </div>
+        </div>
+    </main>
+    <script>
+        const frasesElement = document.getElementById('carousel-frases');
+        let frases = [];
+        let indexAtual = 0;
+
+        async function carregarFrases() {
+            try {
+                const resposta = await fetch('https://focustime-2ha8.onrender.com/frases');
+                frases = await resposta.json();
+                mostrarFrase();
+                setInterval(trocarFrase, 5000); // troca a cada 5 segundos
+            } catch (erro) {
+                frasesElement.innerText = "Não foi possível carregar frases.";
+                console.error(erro);
+            }
+        }
+
+        function mostrarFrase() {
+            if (frases.length > 0) {
+                frasesElement.style.opacity = 0;
+                setTimeout(() => {
+                    frasesElement.innerText = `"${frases[indexAtual].texto}"`;
+                    frasesElement.style.opacity = 1;
+                }, 300);
+            }
+        }
+
+        function trocarFrase() {
+            indexAtual = (indexAtual + 1) % frases.length;
+            mostrarFrase();
+        }
+
+        carregarFrases();
+    </script>
+
+    <script>
+        // Login
+        document.addEventListener('DOMContentLoaded', () => {
+            const usuario =
+                localStorage.getItem('loggedUser') ||
+                sessionStorage.getItem('usuarioLogado');
+
+            if (!usuario) {
+                window.location.href = 'login.html';
+            }
+
+            try {
+                const userData = JSON.parse(usuario);
+                console.log("Usuário logado:", userData.email);
+            } catch (e) {
+                localStorage.removeItem('loggedUser');
+                sessionStorage.removeItem('usuarioLogado');
+                window.location.href = 'login.html';
+            }
+
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                localStorage.removeItem('loggedUser');
+                sessionStorage.removeItem('usuarioLogado');
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+
+</html>

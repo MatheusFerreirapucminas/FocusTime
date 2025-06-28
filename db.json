@@ -1,0 +1,163 @@
+{
+  "usuarios": [
+    {
+      "id": "586a",
+      "nome": "Matheus Henrique",
+      "idade": 18,
+      "cpf": "15975395175",
+      "telefone": "15975395175",
+      "email": "matheushbf14@gmail.com",
+      "password": "123456Ma",
+      "foto": "https://res.cloudinary.com/dqmrubnvg/image/upload/v1750995730/k6pdjdh2pmjw4u4abipj.jpg",
+      "dataCadastro": "2025-06-24T21:08:14.339Z"
+    },
+    {
+      "id": "c041",
+      "nome": "Homem Aranha",
+      "idade": 18,  
+      "cpf": "36985214753",
+      "telefone": "36985214753",
+      "email": "teteulindo@gmail.com",
+      "password": "123456Ma",
+      "foto": "https://res.cloudinary.com/dqmrubnvg/image/upload/v1750993163/a8l0sailoqbvfiih7zch.jpg",
+      "dataCadastro": "2025-06-27T03:43:08.818Z"
+    }
+  ],
+  "tarefa": [
+    {
+      "id": "9178",
+      "titulo": "Documentação",
+      "descricao": "Documentação do nosso projeto de TIAW - Gestão de Tempo.",
+      "data": "2025-06-29",
+      "dificuldade": "difícil"
+    },
+    {
+      "id": "6e63",
+      "titulo": "Casos de Teste",
+      "descricao": "Testar todas as funções do nosso site.",
+      "data": "2025-06-29",
+      "dificuldade": "difícil"
+    },
+    {
+      "id": "9a8b",
+      "titulo": "Site -> Internet",
+      "descricao": "Hospedar nosso site em algum lugar.",
+      "data": "2025-06-29",
+      "dificuldade": "difícil"
+    },
+    {
+      "id": "8eff",
+      "titulo": "Slide",
+      "descricao": "Montar os slides da nossa apresentação/venda do produto.",
+      "data": "2025-06-29",
+      "dificuldade": "difícil"
+    },
+    {
+      "id": "442b",
+      "titulo": "Vídeos",
+      "descricao": "Muitos vídeos sobre o nosso site - TIAW.",
+      "data": "2025-06-29",
+      "dificuldade": "difícil"
+    }
+  ],
+  "eventos": [
+    {
+      "id": "cd1d",
+      "dia": 3,
+      "mes": 7,
+      "ano": 2025,
+      "titulo": "Jogo do Cruzeiro",
+      "horario": "19:00"
+    }
+  ],
+  "frases": [
+    {
+      "id": "1",
+      "texto": "Seu tempo é precioso. Use-o com sabedoria.  "
+    },
+    {
+      "id": "2",
+      "texto": "Concentre-se no que você pode controlar."
+    },
+    {
+      "id": "3",
+      "texto": "A disciplina é a ponte entre metas e conquistas."
+    },
+    {
+      "id": "4",
+      "texto": "Não espere motivação, crie hábitos."
+    },
+    {
+      "id": "5",
+      "texto": "Pequenos passos levam a grandes resultados."
+    },
+    {
+      "id": "6",
+      "texto": "Você é mais capaz do que imagina."
+    },
+    {
+      "id": "7",
+      "texto": "Menos perfeição, mais ação."
+    },
+    {
+      "id": "8",
+      "texto": "Você não precisa ser o melhor, só precisa começar."
+    },
+    {
+      "id": "9",
+      "texto": "Foco no que importa, não no que distrai."
+    },
+    {
+      "id": "10",
+      "texto": "Feito é melhor que perfeito."
+    },
+    {
+      "id": "11",
+      "texto": "A constância vence a intensidade."
+    },
+    {
+      "id": "12",
+      "texto": "Planeje seu dia antes que o dia planeje você."
+    },
+    {
+      "id": "13",
+      "texto": "Comece agora. O momento perfeito é uma ilusão."
+    },
+    {
+      "id": "14",
+      "texto": "O progresso acontece fora da zona de conforto."
+    },
+    {
+      "id": "15",
+      "texto": "Organização é liberdade disfarçada."
+    },
+    {
+      "id": "16",
+      "texto": "Desista de desistir."
+    },
+    {
+      "id": "17",
+      "texto": "Respire fundo e continue."
+    },
+    {
+      "id": "18",
+      "texto": "Não é sobre tempo, é sobre prioridade."
+    },
+    {
+      "id": "19",
+      "texto": "Persistência transforma tentativa em conquista."
+    },
+    {
+      "id": "20",
+      "texto": "Você tem o tempo. Use-o com intenção."
+    },
+    {
+      "id": "21",
+      "texto": "A vida é feita de escolhas, e cada escolha é um passo em direção ao nosso destino."
+    },
+    {
+      "id": "22",
+      "texto": "O sucesso não é o resultado de um acidente, mas sim o resultado de uma preparação cuidadosa."
+    }
+  ]
+}

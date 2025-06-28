@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .editar-perfil-container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff5e9;
+            box-shadow: 0 2px 10px #ff7c2d;
+            font-family: sans-serif;
+        }
+
+        form label {
+            display: block;
+            margin: 10px 0 4px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .botoes {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .botoes button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        #salvarBtn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #cancelarBtn {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- Logo -->
+        <div class="logo"><img src="images/Logo_TIAW.jpg" /><a href="index.html">FocusTime</a></div>
+
+        <!-- Menu -->
+        <nav>
+            <a href="index.html" class="active">HOME</a>
+            <a href="tarefas.html">TAREFAS</a>
+            <a href="agenda.html">AGENDA</a>
+        </nav>
+        <div class="icons">
+            <span class="icon"><a href="perfil.html" class="fas fa-user"></a></span>
+            <span class="icon"><a href="configuracoes.html" class="fas fa-cog"></a></span>
+            <span class="icon"><a href="dicas.html" class="fas fa-lightbulb"></a></span>
+        </div>
+    </header>
+
+    <main class="editar-perfil-container">
+        <h2 style="text-align: center;">Editar Perfil</h2>
+
+        <form id="formEditarPerfil">
+            <label>Nome Completo:</label>
+            <input type="text" id="nome" required />
+
+            <label>Email:</label>
+            <input type="email" id="email" required />
+
+            <label>Senha:</label>
+            <input type="password" id="senha" required />
+
+            <label>URL da Foto de Perfil:</label>
+            <input type="url" id="foto" placeholder="https://..." />
+
+            <div class="botoes">
+                <button type="button" id="cancelarBtn">Cancelar</button>
+                <button type="submit" id="salvarBtn">Salvar</button>
+            </div>
+        </form>
+    </main>
+    <script>
+        // Login
+        document.addEventListener('DOMContentLoaded', () => {
+            const usuario =
+                localStorage.getItem('loggedUser') ||
+                sessionStorage.getItem('usuarioLogado');
+
+            if (!usuario) {
+                window.location.href = 'login.html';
+            }
+
+            try {
+                const userData = JSON.parse(usuario);
+                console.log("Usuário logado:", userData.email);
+            } catch (e) {
+                localStorage.removeItem('loggedUser');
+                sessionStorage.removeItem('usuarioLogado');
+                window.location.href = 'login.html';
+            }
+
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                localStorage.removeItem('loggedUser');
+                sessionStorage.removeItem('usuarioLogado');
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const usuarioLogado = JSON.parse(localStorage.getItem('loggedUser') || sessionStorage.getItem('usuarioLogado'));
+
+            if (!usuarioLogado || !usuarioLogado.id) {
+                alert("Você precisa estar logado.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const userId = usuarioLogado.id;
+
+            document.getElementById('nome').value = usuarioLogado.nome || '';
+            document.getElementById('email').value = usuarioLogado.email || '';
+            document.getElementById('senha').value = usuarioLogado.password || '';
+            document.getElementById('foto').value = usuarioLogado.foto || '';
+
+            document.getElementById('cancelarBtn').addEventListener('click', () => {
+                window.location.href = "perfil.html";
+            });
+
+            document.getElementById('formEditarPerfil').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const nome = document.getElementById('nome').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const senha = document.getElementById('senha').value.trim();
+                const foto = document.getElementById('foto').value.trim();
+
+                const usuarioAtualizado = {
+                    ...usuarioLogado,
+                    nome,
+                    email,
+                    password: senha,
+                    foto
+                };
+
+                try {
+                    const response = await fetch(`https://focustime-2ha8.onrender.com/usuarios/${userId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(usuarioAtualizado)
+                    });
+
+                    if (!response.ok) throw new Error("Erro ao salvar dados.");
+
+                    localStorage.setItem('loggedUser', JSON.stringify(usuarioAtualizado));
+                    sessionStorage.setItem('usuarioLogado', JSON.stringify(usuarioAtualizado));
+
+                    alert("Dados atualizados com sucesso!");
+                    window.location.href = "perfil.html";
+                } catch (erro) {
+                    console.error(erro);
+                    alert("Ocorreu um erro ao salvar os dados.");
+                }
+            });
+        });
+    </script>
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatos do Grupo - Team Connect</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --orange: #FF6B35;
+            --black: #1A1A1A;
+            --white: #FFFFFF;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--orange) 0%, #ff8759 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(255, 107, 53, 0.25);
+        }
+
+        .profile-img {
+            background: linear-gradient(45deg, var(--orange), #ff8759);
+            border: 4px solid var(--white);
+        }
+
+        .social-btn {
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .linkedin-btn:hover {
+            background-color: #0077B5;
+        }
+
+        .github-btn:hover {
+            background-color: #333;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .animate-delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .animate-delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .animate-delay-3 {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-4 animate-fade-in-up"><a href="index.html">Nossa Equipe</a></h1>
+            <p class="text-xl opacity-90 animate-fade-in-up animate-delay-1">Conheça os profissionais por trás dos
+                nossos projetos</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+            <!-- Card 1 - Ana Silva -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg card-hover animate-fade-in-up animate-delay-1"
+                style="opacity: 0;">
+                <div class="text-center mb-6">
+                    <div
+                        class="profile-img w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-3xl font-bold">
+                        <img src="images/Ana.jpg" style="border-radius: 50%; width: 100px; height: 90px;">
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Ana Luiza</h3>
+                    <p class="text-orange-500 font-semibold mb-3">Analista de Sistemas</p>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Aluna da Pontifícia Universidade Católica de Minas Gerais - Campus Betim, cursa o primeiro
+                        período do curso Sistemas de Informação.
+                    </p>
+                </div>
+
+                <div class="border-t pt-6">
+                    <div class="flex justify-center space-x-4 mb-4">
+                        <a href="https://www.linkedin.com/in/ana-luiza-aa3b6a350?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                            target="_blank"
+                            class="social-btn linkedin-btn bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="https://github.com/AnaLuizaDama" target="_blank"
+                            class="social-btn github-btn bg-gray-800 text-white p-3 rounded-full hover:bg-gray-900">
+                            <i class="fab fa-github text-lg"></i>
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        <a href="mailto:aldmiranda@sga.pucminas.br" class="text-orange-500 hover:text-orange-600 text-sm">
+                            <i class="fas fa-envelope mr-2"></i>aldmiranda@sga.pucminas.br
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 - Carlos Santos -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg card-hover animate-fade-in-up animate-delay-2"
+                style="opacity: 0;">
+                <div class="text-center mb-6">
+                    <div
+                        class="profile-img w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-3xl font-bold">
+                        <img src="images/Fernando.jpg" style="border-radius: 50%; width: 100px; height: 90px;">
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Fernando Otávio</h3>
+                    <p class="text-orange-500 font-semibold mb-3">Analista de Sistemas</p>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Aluno da Pontifícia Universidade Católica de Minas Gerais - Campus Betim, cursa o primeiro
+                        período do curso Sistemas de Informação.
+                    </p>
+                </div>
+
+                <div class="border-t pt-6">
+                    <div class="flex justify-center space-x-4 mb-4">
+                        <a href="https://linkedin.com/in/carlos-santos" target="_blank"
+                            class="social-btn linkedin-btn bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="https://github.com/Fompneto" target="_blank"
+                            class="social-btn github-btn bg-gray-800 text-white p-3 rounded-full hover:bg-gray-900">
+                            <i class="fab fa-github text-lg"></i>
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        <a href="mailto:fompneto@gmail.com" class="text-orange-500 hover:text-orange-600 text-sm">
+                            <i class="fas fa-envelope mr-2"></i>fompneto@gmail.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 - Maria Oliveira -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg card-hover animate-fade-in-up animate-delay-3"
+                style="opacity: 0;">
+                <div class="text-center mb-6">
+                    <div
+                        class="profile-img w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-3xl font-bold">
+                        <img src="images/Matheus.jpeg" style="border-radius: 50%; width: 100px; height: 90px;">
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Matheus Henrique</h3>
+                    <p class="text-orange-500 font-semibold mb-3">Analista de Sistemas</p>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Aluno da Pontifícia Universidade Católica de Minas Gerais - Campus Betim, cursa o primeiro
+                        período do curso Sistemas de Informação.
+                    </p>
+                </div>
+
+                <div class="border-t pt-6">
+                    <div class="flex justify-center space-x-4 mb-4">
+                        <a href="www.linkedin.com/in/matheus-ferreira1401007" target="_blank"
+                            class="social-btn linkedin-btn bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="https://github.com/MatheusFerreirapucminas" target="_blank"
+                            class="social-btn github-btn bg-gray-800 text-white p-3 rounded-full hover:bg-gray-900">
+                            <i class="fab fa-github text-lg"></i>
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        <a href="mailto:matheushbf14@gmail.com" class="text-orange-500 hover:text-orange-600 text-sm">
+                            <i class="fas fa-envelope mr-2"></i>matheushbf14@gmail.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-white py-12" style="background-color: #222;">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-2xl mx-auto">
+                <h3 class="text-2xl font-bold mb-4">Entre em Contato</h3>
+                <p class="text-gray-300 mb-6">
+                    Somos uma equipe apaixonada por tecnologia e inovação.
+                    Estamos sempre abertos a novos desafios e oportunidades de colaboração.
+                </p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <div class="text-center">
+                        <i class="fas fa-users text-orange-500 text-2xl mb-2"></i>
+                        <p class="text-sm text-gray-300">3 Estudantes</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-code text-orange-500 text-2xl mb-2"></i>
+                        <p class="text-sm text-gray-300">Desenvolvimento e Aprendizado</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-palette text-orange-500 text-2xl mb-2"></i>
+                        <p class="text-sm text-gray-300">Design & UX</p>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 pt-6">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 FocusTime. Feito com <i class="fas fa-heart text-orange-500"></i> pela nossa equipe.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Login
+        document.addEventListener('DOMContentLoaded', () => {
+            const usuario =
+                localStorage.getItem('loggedUser') ||
+                sessionStorage.getItem('usuarioLogado');
+
+            if (!usuario) {
+                window.location.href = 'login.html';
+            }
+
+            try {
+                const userData = JSON.parse(usuario);
+                console.log("Usuário logado:", userData.email);
+            } catch (e) {
+                localStorage.removeItem('loggedUser');
+                sessionStorage.removeItem('usuarioLogado');
+                window.location.href = 'login.html';
+            }
+
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                localStorage.removeItem('loggedUser');
+                sessionStorage.removeItem('usuarioLogado');
+                window.location.href = 'login.html';
+            });
+        });
+
+        // Animate cards on scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tela de Cadastros</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --primary-bg: #fff5e9;
+            --primary-orange: #ff7c2d;
+            --primary-dark: #222;
+        }
+
+        * {
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #ffecd9 100%);
+            min-height: 100vh;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-orange) 0%, #ff9147 100%);
+        }
+
+        .card-shadow {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .input-focus:focus {
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255, 124, 45, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-orange) 0%, #ff9147 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 124, 45, 0.3);
+        }
+
+        .photo-container {
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-bg) 100%);
+        }
+
+        .error-message {
+            display: none;
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .form-control {
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <main class="container mx-auto px-6 py-12">
+        <div class="max-w-2xl mx-auto">
+            <div class="text-center mb-10">
+                <div class="animate-float inline-block mb-6">
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg mx-auto">
+                        <i class="fas fa-user-plus text-3xl" style="color: var(--primary-orange)"></i>
+                    </div>
+                </div>
+                <h1 class="text-4xl font-bold mb-4" style="color: var(--primary-dark)">
+                    Bem-vindo ao FocusTime!
+                </h1>
+                <p class="text-lg text-gray-600 max-w-md mx-auto">
+                    Crie sua conta e comece a transformar sua produtividade hoje mesmo...
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl p-8 card-shadow">
+                <form id="registrationForm" class="space-y-6">
+                    <div class="text-center">
+                        <div class="photo-upload mb-6">
+                            <div class="photo-preview-container mb-4">
+                                <div
+                                    class="w-32 h-32 mx-auto rounded-full overflow-hidden photo-container border-4 border-white shadow-lg">
+                                    <img id="photoPreview" alt="Pré-visualização da foto"
+                                        class="w-full h-full object-cover" style="display: none" />
+                                    <div class="photo-placeholder w-full h-full flex items-center justify-center"
+                                        id="photoPlaceholder">
+                                        <i class="fas fa-user text-4xl text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="photo-actions" id="photoActions">
+                                <input type="file" id="photoInput" accept="image/*" style="display: none" />
+                                <button type="button"
+                                    class="btn-primary text-white px-6 py-3 rounded-full font-semibold inline-flex items-center space-x-2 shadow-lg"
+                                    onclick="document.getElementById('photoInput').click()">
+                                    <i class="fas fa-camera"></i>
+                                    <span>Adicionar Foto</span>
+                                </button>
+                            </div>
+
+                            <div class="edit-tools flex justify-center space-x-3 mt-4" id="editTools"
+                                style="display: none">
+                                <button type="button"
+                                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium inline-flex items-center space-x-2 transition-all"
+                                    id="removePhotoBtn">
+                                    <i class="fas fa-trash"></i>
+                                    <span>Remover</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Fields -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label for="firstName" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user mr-2" style="color: var(--primary-orange)"></i>Primeiro Nome
+                            </label>
+                            <input type="text"
+                                class="form-control w-full px-4 py-3 border border-gray-300 rounded-lg input-focus"
+                                id="firstName" required />
+                            <div class="error-message" id="firstNameError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user mr-2" style="color: var(--primary-orange)"></i>Sobrenome
+                            </label>
+                            <input type="text"
+                                class="form-control w-full px-4 py-3 border border-gray-300 rounded-lg input-focus"
+                                id="lastName" required />
+                            <div class="error-message" id="lastNameError"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age" class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-birthday-cake mr-2" style="color: var(--primary-orange)"></i>Idade
+                        </label>
+                        <input type="number"
+                            class="form-control w-full px-4 py-3 border border-gray-300 rounded-lg input-focus" id="age"
+                            min="12" max="120" required />
+                        <div class="error-message" id="ageError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cpf" class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-id-card mr-2" style="color: var(--primary-orange)"></i>CPF
+                        </label>
+                        <input type="text"
+                            class="form-control w-full px-4 py-3 border border-gray-300 rounded-lg input-focus" id="cpf"
+                            placeholder="000.000.000-00" />
+                        <div class="error-message" id="cpfError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-phone mr-2" style="color: var(--primary-orange)"></i>Telefone
+                        </label>
+                        <input type="tel"
+                            class="form-control w-full px-4 py-3 border border-gray-300 rounded-lg input-focus"
+                            id="phone" placeholder="(00) 00000-0000" />
+                        <div class="error-message" id="phoneError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-envelope mr-2" style="color: var(--primary-orange)"></i>Email
+                        </label>
+                        <input type="email"
+                            class="form-control w-full px-4 py-3 border border-gray-300 rounded-lg input-focus"
+                            id="email" required />
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-lock mr-2" style="color: var(--primary-orange)"></i>Senha
+                            </label>
+                            <input type="password"
+                                class="form-control w-full px-4 py-3 border border-gray-300 rounded-lg input-focus"
+                                id="password" required />
+                            <div class="error-message" id="passwordError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-lock mr-2" style="color: var(--primary-orange)"></i>Confirmar Senha
+                            </label>
+                            <input type="password"
+                                class="form-control w-full px-4 py-3 border border-gray-300 rounded-lg input-focus"
+                                id="confirmPassword" required />
+                            <div class="error-message" id="confirmPasswordError"></div>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="btn-primary w-full text-white py-4 px-8 rounded-lg font-bold text-lg inline-flex items-center justify-center space-x-3 shadow-lg">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Criar Conta</span>
+                    </button>
+
+                    <div class="text-center pt-6 border-t border-gray-200">
+                        <p class="text-gray-600">
+                            Já tem uma conta?
+                            <a href="login.html" class="font-semibold hover:underline transition-all"
+                                style="color: var(--primary-orange)">Faça login aqui</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Elementos do DOM
+        const photoInput = document.getElementById("photoInput");
+        const photoPreview = document.getElementById("photoPreview");
+        const photoPlaceholder = document.getElementById("photoPlaceholder");
+        const photoActions = document.getElementById("photoActions");
+        const editTools = document.getElementById("editTools");
+        const removePhotoBtn = document.getElementById("removePhotoBtn");
+
+        // Cloudinary configuração
+        const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dqmrubnvg/image/upload";
+        const CLOUDINARY_UPLOAD_PRESET = "dfrvfyju";
+
+        let fotoFinal = "";
+
+        // Upload de imagem - Cloudinary
+        photoInput.addEventListener("change", async function (e) {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+
+                const formData = new FormData();
+                formData.append("file", file);
+                formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+
+                try {
+                    const res = await fetch(CLOUDINARY_URL, {
+                        method: "POST",
+                        body: formData,
+                    });
+
+                    const data = await res.json();
+
+                    if (data.secure_url) {
+                        photoPreview.src = data.secure_url;
+                        photoPreview.style.display = "block";
+                        photoPlaceholder.style.display = "none";
+
+                        editTools.style.display = "flex";
+
+                        photoActions.style.display = "none";
+
+                        fotoFinal = data.secure_url;
+                    } else {
+                        alert("Erro ao carregar imagem.");
+                        console.log(data);
+                    }
+                } catch (err) {
+                    console.error("Erro ao fazer upload no Cloudinary:", err);
+                }
+            }
+        });
+
+        // Remover imagem
+        removePhotoBtn.addEventListener("click", function () {
+            photoPreview.src = "";
+            photoPreview.style.display = "none";
+            photoPlaceholder.style.display = "flex";
+
+            editTools.style.display = "none";
+
+            photoActions.style.display = "flex";
+
+            fotoFinal = "";
+
+            photoInput.value = "";
+        });
+
+        // Submissão do cadastro
+        const registrationForm = document.getElementById("registrationForm");
+        registrationForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                alert("As senhas não coincidem!");
+                return;
+            }
+
+            const userData = {
+                nome:
+                    document.getElementById("firstName").value +
+                    " " +
+                    document.getElementById("lastName").value,
+                idade: parseInt(document.getElementById("age").value),
+                cpf: document.getElementById("cpf").value.replace(/\D/g, ""),
+                telefone: document.getElementById("phone").value.replace(/\D/g, ""),
+                email: document.getElementById("email").value,
+                password: password,
+                foto: fotoFinal || "",
+                dataCadastro: new Date().toISOString(),
+            };
+
+            try {
+                // Verificações
+                const verificaEmail = await fetch(
+                    `https://focustime-2ha8.onrender.com/usuarios?email=${encodeURIComponent(
+                        userData.email
+                    )}`
+                );
+                const emailCheck = await verificaEmail.json();
+                if (emailCheck.length > 0) {
+                    alert("Este e-mail já está cadastrado.");
+                    return;
+                }
+
+                const verificaCPF = await fetch(
+                    `https://focustime-2ha8.onrender.com/usuarios?cpf=${encodeURIComponent(userData.cpf)}`
+                );
+                const cpfCheck = await verificaCPF.json();
+                if (cpfCheck.length > 0) {
+                    alert("Este CPF já está cadastrado.");
+                    return;
+                }
+
+                // Cadastro
+                const res = await fetch("https://focustime-2ha8.onrender.com/usuarios", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(userData),
+                });
+
+                if (!res.ok) throw new Error("Erro ao cadastrar");
+
+                alert("Cadastro realizado com sucesso!");
+                window.location.href = "login.html";
+            } catch (err) {
+                console.error("Erro ao cadastrar:", err);
+                alert("Erro ao cadastrar. Tente novamente.");
+            }
+        });
+    </script>
+</body>
+
+</html>

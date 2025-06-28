@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <header>
+        <!-- Logo -->
+        <div class="logo"><img src="images/Logo_TIAW.jpg" /><a href="index.html">FocusTime</a></div>
+
+        <!-- Menu -->
+        <nav>
+            <a href="index.html" class="active">HOME</a>
+            <a href="tarefas.html">TAREFAS</a>
+            <a href="agenda.html">AGENDA</a>
+        </nav>
+        <div class="icons">
+            <span class="icon"><a href="perfil.html" class="fas fa-user"></a></span>
+            <span class="icon"><a href="configuracoes.html" class="fas fa-cog"></a></span>
+            <span class="icon"><a href="dicas.html" class="fas fa-lightbulb"></a></span>
+        </div>
+    </header>
+    <br>
+    <h3 style="padding: 10px;">Novas funções em breve!</h3>
+
+    <script>
+        // Login
+        document.addEventListener('DOMContentLoaded', () => {
+            const usuario =
+                localStorage.getItem('loggedUser') ||
+                sessionStorage.getItem('usuarioLogado');
+
+            if (!usuario) {
+                window.location.href = 'login.html';
+            }
+
+            try {
+                const userData = JSON.parse(usuario);
+                console.log("Usuário logado:", userData.email);
+            } catch (e) {
+                localStorage.removeItem('loggedUser');
+                sessionStorage.removeItem('usuarioLogado');
+                window.location.href = 'login.html';
+            }
+
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                localStorage.removeItem('loggedUser');
+                sessionStorage.removeItem('usuarioLogado');
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+
+</html>

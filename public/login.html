@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusTime - Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff5e9 0%, #ffe8d4 50%, #ff7c2d 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ff7c2d, #ff5722);
+        }
+
+        .login-header {
+            padding: 40px 30px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #fff5e9, #ffffff);
+        }
+
+        .logo-container {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff7c2d, #ff5722);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(255, 124, 45, 0.3);
+        }
+
+        .logo-container i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .login-title {
+            color: #222;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            color: #777;
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        .login-form {
+            padding: 20px 30px 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            color: #222;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #ff7c2d;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 124, 45, 0.1);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .input-icon:hover {
+            color: #ff7c2d;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            accent-color: #ff7c2d;
+        }
+
+        .remember-me label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: #ff7c2d;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #e55a00;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ff7c2d, red);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .login-button:hover {
+            background: linear-gradient(135deg, red, #ff7c2d);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 124, 45, 0.3);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .login-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .register-link {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #ff7c2d;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .register-link a:hover {
+            color: #e55a00;
+        }
+
+        .message {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            animation: slideIn 0.3s ease;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+        }
+
+        .message i {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .login-header {
+                padding: 30px 20px 15px;
+            }
+
+            .login-form {
+                padding: 15px 20px 30px;
+            }
+
+            .login-title {
+                font-size: 28px;
+            }
+
+            .form-control {
+                padding: 12px 40px 12px 12px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo-container">
+                <i class="fas fa-clock"></i>
+            </div>
+            <h1 class="login-title">FocusTime</h1>
+            <p class="login-subtitle">Entre na sua conta para continuar</p>
+        </div>
+
+        <form class="login-form" id="loginForm">
+            <div id="successMessage" class="message success-message">
+                <i class="fas fa-check-circle"></i>
+                <span>Login realizado com sucesso! Redirecionando...</span>
+            </div>
+
+            <div id="errorMessage" class="message error-message">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span id="errorText">Email ou senha incorretos</span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-container">
+                    <input type="email" id="email" class="form-control" placeholder="Digite seu email" required>
+                    <i class="fas fa-envelope input-icon"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <div class="input-container">
+                    <input type="password" id="password" class="form-control" placeholder="Digite sua senha" required>
+                    <i class="fas fa-eye input-icon" id="togglePassword"></i>
+                </div>
+            </div>
+
+            <div class="remember-forgot">
+                <div class="remember-me">
+                    <input type="checkbox" id="lembrar">
+                    <label for="lembrar">Lembrar de mim</label>
+                </div>
+                <a href="#" class="forgot-password">Esqueceu a senha?</a>
+            </div>
+
+            <button type="submit" class="login-button" id="submitBtn">
+                <span id="submitText">Entrar</span>
+                <div id="loadingSpinner" class="loading-spinner"></div>
+            </button>
+
+            <div class="register-link">
+                Não tem uma conta? <a href="cadastro.html">Criar nova conta</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const API_URL = 'https://focustime-2ha8.onrender.com';
+            const loginForm = document.getElementById('loginForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+
+            togglePassword.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                togglePassword.classList.toggle('fa-eye');
+                togglePassword.classList.toggle('fa-eye-slash');
+            });
+
+            function showError(message) {
+                errorText.textContent = message;
+                errorMessage.style.display = 'flex';
+                successMessage.style.display = 'none';
+                loginForm.classList.add('shake');
+                setTimeout(() => loginForm.classList.remove('shake'), 500);
+            }
+
+            function showSuccess() {
+                successMessage.style.display = 'flex';
+                errorMessage.style.display = 'none';
+            }
+
+            function setLoading(isLoading) {
+                if (isLoading) {
+                    submitBtn.disabled = true;
+                    submitText.textContent = 'Entrando...';
+                    loadingSpinner.style.display = 'inline-block';
+                } else {
+                    submitBtn.disabled = false;
+                    submitText.textContent = 'Entrar';
+                    loadingSpinner.style.display = 'none';
+                }
+            }
+
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            if (window.location.pathname.includes('login.html')) {
+                const savedUser = localStorage.getItem('loggedUser') || sessionStorage.getItem('usuarioLogado');
+                if (savedUser) {
+                    try {
+                        const userData = JSON.parse(savedUser);
+                        if (userData && userData.email) {
+                            showSuccess();
+                            setTimeout(() => {
+                                window.location.href = 'index.html';
+                            }, 1000);
+                        }
+                    } catch (e) {
+                        localStorage.removeItem('loggedUser');
+                        sessionStorage.removeItem('usuarioLogado');
+                    }
+                }
+            }
+
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const lembrar = document.getElementById('lembrar').checked;
+
+                if (!email) {
+                    showError('Por favor, digite seu email');
+                    return;
+                }
+
+                if (!isValidEmail(email)) {
+                    showError('Por favor, digite um email válido');
+                    return;
+                }
+
+                if (!password) {
+                    showError('Por favor, digite sua senha');
+                    return;
+                }
+
+                if (password.length < 6) {
+                    showError('A senha deve ter pelo menos 6 caracteres');
+                    return;
+                }
+
+                setLoading(true);
+
+                try {
+                    const response = await fetch(`${API_URL}/usuarios?email=${encodeURIComponent(email)}`);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const usuarios = await response.json();
+
+                    if (!usuarios.length || usuarios[0].password !== password) {
+                        showError('Email ou senha incorretos');
+                        setLoading(false);
+                        return;
+                    }
+
+                    const usuario = usuarios[0];
+
+                    sessionStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+                    if (lembrar) {
+                        localStorage.setItem('loggedUser', JSON.stringify(usuario));
+                    }
+
+                    showSuccess();
+
+                    setTimeout(() => {
+                        console.log('Login realizado com sucesso!');
+                        window.location.href = 'index.html';
+                    }, 1500);
+
+                } catch (err) {
+                    console.error('Erro ao fazer login:', err);
+
+                    if (err.message.includes('Failed to fetch')) {
+                        showError('Erro de conexão. Verifique se o servidor está rodando.');
+                    } else {
+                        showError('Erro ao fazer login. Tente novamente.');
+                    }
+
+                    setLoading(false);
+                }
+            });
+
+            document.getElementById('email').addEventListener('input', () => {
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+            });
+
+            document.getElementById('password').addEventListener('input', () => {
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>

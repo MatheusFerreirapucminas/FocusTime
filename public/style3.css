@@ -1,0 +1,651 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #fff5e9;
+    color: #222;
+    line-height: 1.6;
+}
+
+/* Cabeçalho */
+header {
+    background-color: white;
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+.logo a {
+    color: #ff7c2d;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+nav a.active,
+nav a:hover {
+    background-color: #ff7c2d;
+    color: white;
+}
+
+.icons {
+    display: flex;
+    gap: 15px;
+}
+
+.icon a {
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: #ff7c2d;
+    transition: transform 0.3s;
+}
+
+.icon a:hover {
+    transform: scale(1.2);
+}
+
+/* === PERFIL === */
+.perfil {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 5%;
+    width: 45%;
+    float: left;
+}
+
+.profile {
+    background-color: #ffd1a4;
+    padding: 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    text-align: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile h3 {
+    color: #444;
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.label {
+    font-size: 14px;
+    margin-top: 5px;
+    font-weight: bold;
+    color: #333;
+    text-align: end;
+}
+
+.bar {
+    width: 100%;
+    height: 12px;
+    border-radius: 10px;
+    background-color: #e0e0e0;
+    margin: 8px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.bar span {
+    display: block;
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.5s ease;
+}
+
+.vida span {
+    background-color: #f44336;
+}
+
+.xp span {
+    background-color: #ff9800;
+}
+
+.back-button {
+    background-color: transparent;
+    text-decoration: none;
+    font-size: medium;
+    color: #ff741e;
+    border: 2px solid #ff741e;
+    padding: 6px 16px;
+    margin: 30px auto 15px auto;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+.back-button:hover {
+    background-color: #ff741e;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* === CALENDÁRIO === */
+.agenda-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    background-color: #ffe0c2;
+    color: #ff7f2a;
+    text-align: center;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.form label {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.form #titulo {
+    margin-bottom: 15px;
+}
+
+.form input,
+.form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    border: 2px solid #faa974;
+    border-radius: 10px;
+    background-color: #fff;
+    resize: none;
+}
+
+textarea,
+input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 2px solid #ffa366;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+#botoesNavegacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+#anterior,
+#proximo {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+#anterior:hover,
+#proximo:hover {
+    background-color: #ff741e;
+    color: white;
+    transform: scale(1.05);
+}
+
+#areaCalendario {
+    margin-left: 20px;
+}
+
+#mesAno {
+    font-weight: bold;
+    color: #ff6600;
+    font-size: 18px;
+    text-align: center;
+}
+
+#calendario table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#calendario th {
+    background-color: #ffe6cc;
+    color: #ff6600;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+
+#calendario td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ffd9b3;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#calendario td:hover {
+    background-color: #ffcc99;
+}
+
+.save-button {
+    width: 60%;
+    background-color: #ff7f2a;
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 20%;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+.save-button:hover {
+    background-color: #ff741e;
+    color: white;
+    transform: scale(1.05);
+}
+
+/*== Tela Agenda ==*/
+
+/*PERFIL*/
+
+.perfil-agenda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+    float: left;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.profile-agenda {
+    background-color: #ffd1a4;
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 500px;
+    height: auto;
+    text-align: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-agenda h3 {
+    color: #444;
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.profile-agenda img {
+    width: 20%;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/*EVENTOS*/
+
+h1 {
+    text-align: center;
+    color: #ff741e;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.evento {
+    background: white;
+    border-left: 6px solid #ff741e;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+    width: 90%;
+}
+
+#eventosContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.evento h2 {
+    margin: 0 0 8px 0;
+    font-size: 1.2em;
+}
+
+.evento .data {
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.evento .horario {
+    font-size: 0.95em;
+    color: #333;
+}
+
+.no-eventos {
+    text-align: center;
+    color: #999;
+    margin-top: 40px;
+    font-style: italic;
+}
+
+.apagar-btn,
+.editar-btn {
+    background-color: #ff741e;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    margin-top: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.apagar-btn:hover,
+.editar-btn:hover {
+    background-color: #c95e1b;
+    transform: scale(1.05);
+}
+
+#verTodosBtn {
+    background-color: transparent;
+    color: #ff6b4d;
+    border: 2px solid #ff6b4d;
+    padding: 6px 16px;
+    margin: 0 auto 15px auto;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+#verTodosBtn:hover {
+    background-color: #ff741e;
+    color: white;
+    transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /*  Perfil  */
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 30px;
+    }
+
+    .menu {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+
+    nav {
+        display: flex;
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 16px;
+    }
+
+    .icons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .form,
+    .agenda-section,
+    .perfil,
+    .profile {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .perfil {
+        margin: 0 auto;
+        width: 100%;
+        align-items: center;
+    }
+
+    .profile {
+        width: 90%;
+        height: auto;
+    }
+
+    .back-button {
+        width: 80%;
+        font-size: 16px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    /* Calendário */
+    .agenda-section {
+        width: 100%;
+    }
+
+    .form input,
+    .form textarea,
+    .save-button {
+        font-size: 16px;
+    }
+
+    /* Agenda */
+
+    /*Perfil*/
+    .perfil-agenda,
+    .profile-agenda {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .perfil-agenda {
+        margin: 0 auto;
+        width: 100%;
+        align-items: center;
+    }
+
+    .profile-agenda {
+        width: 90%;
+        height: auto;
+    }
+
+    /*Eventos*/
+    .evento {
+        display: block;
+        width: 100%;
+        margin-left: 20px;
+    }
+
+    #verTodosBtn {
+        display: block;
+        margin: 15px auto;
+        text-align: center;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    header {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        position: static;
+        gap: 15px;
+    }
+
+    .logo {
+        flex-shrink: 0;
+        gap: 10px;
+    }
+
+    nav {
+        display: flex;
+        gap: 15px;
+        flex-shrink: 1;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    .icons {
+        display: flex;
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .logo img {
+        display: none;
+    }
+
+    .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .perfil-agenda {
+        max-width: 50%;
+    }
+
+    .profile {
+        width: 90%;
+        margin-left: 20px;
+        padding: 20px;
+    }
+
+    .back-button {
+        font-size: 90%;
+        text-align: center;
+        width: 60%;
+    }
+
+    .agenda-section {
+        align-items: center;
+    }
+
+    .title,
+    .form,
+    .save-button {
+        width: 100%;
+    }
+
+    #eventosContainer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    #eventosContainer .evento {
+        margin-left: 25px;
+        width: 85%;
+    }
+
+    #verTodosBtn {
+        display: block;
+        margin: 15px auto;
+        text-align: center;
+    }
+}
