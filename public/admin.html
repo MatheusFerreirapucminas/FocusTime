@@ -32,8 +32,15 @@
         const BASE_URL = "https://focustime-9z8f.onrender.com";
         const container = document.getElementById("usuariosContainer");
 
-        // Verifica se é admin
-        const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+        let usuarioLogado = null;
+        try {
+            const usuarioStorage = localStorage.getItem("usuarioLogado");
+            if (usuarioStorage) {
+                usuarioLogado = JSON.parse(usuarioStorage);
+            }
+        } catch (e) {
+            console.error("Erro ao ler dados do localStorage:", e);
+        }
 
         if (!usuarioLogado || !usuarioLogado.admin) {
             alert("Acesso negado. Apenas administradores podem acessar esta página.");
@@ -50,23 +57,24 @@
                 container.innerHTML = "";
 
                 usuarios.forEach(usuario => {
-                    const linha = document.createElement("tr");
-                    linha.className = "border-b hover:bg-gray-100";
+                    const card = document.createElement("div");
+                    card.className = "bg-white p-4 shadow-md rounded flex justify-between items-center";
 
-                    linha.innerHTML = `
-                <td class="p-3">${usuario.id}</td>
-                <td class="p-3">${usuario.nome}</td>
-                <td class="p-3">${usuario.email}</td>
-                <td class="p-3">${usuario.admin ? "Sim" : "Não"}</td>
-                <td class="p-3">
-                    <button onclick="excluirUsuario('${usuario.id}')" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Excluir</button>
-                </td>
-            `;
+                    card.innerHTML = `
+        <div>
+          <p><strong>ID:</strong> ${usuario.id}</p>
+          <p><strong>Email:</strong> ${usuario.email}</p>
+          <p><strong>Admin:</strong> ${usuario.admin ? "Sim" : "Não"}</p>
+        </div>
+        <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onclick="excluirUsuario(${usuario.id})">
+          Excluir
+        </button>
+      `;
 
-                    container.appendChild(linha);
+                    container.appendChild(card);
                 });
             } catch (err) {
-                container.innerHTML = `<tr><td colspan="5" class="p-4 text-red-500">Erro ao carregar usuários.</td></tr>`;
+                container.innerHTML = "<p class='text-red-500'>Erro ao carregar usuários.</p>";
                 console.error("Erro:", err);
             }
         }
