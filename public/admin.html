@@ -4,102 +4,129 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin - Gerenciar Usuários</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100 p-6">
-    <div class="max-w-4xl mx-auto">
-        <h1 class="text-3xl font-bold mb-2 text-center">Painel do Administrador</h1>
-        <p class="text-gray-600 text-center mb-6">Gerencie os usuários cadastrados no sistema</p>
-
-        <div class="overflow-x-auto">
-            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-                <thead class="bg-gray-200 text-gray-700 text-left">
-                    <tr>
-                        <th class="p-3">ID</th>
-                        <th class="p-3">Nome</th>
-                        <th class="p-3">Email</th>
-                        <th class="p-3">Admin</th>
-                        <th class="p-3">Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="usuariosContainer" class="text-gray-800"></tbody>
-            </table>
-        </div>
+    <h1 class="text-2xl font-bold mb-4">Painel do Administrador</h1>
+    <div id="usuariosContainer" class="space-y-4">
+        <p class="text-gray-500">Carregando usuários...</p>
     </div>
 
     <script>
         const BASE_URL = "https://focustime-9z8f.onrender.com";
         const container = document.getElementById("usuariosContainer");
 
-        let usuarioLogado = null;
-        try {
-            const usuarioStorage = localStorage.getItem("usuarioLogado");
-            if (usuarioStorage) {
-                usuarioLogado = JSON.parse(usuarioStorage);
+        // Verificação do usuário logado
+        function verificarAdmin() {
+            try {
+                const usuarioStorage = localStorage.getItem("usuarioLogado");
+                if (!usuarioStorage) {
+                    redirecionarParaLogin();
+                    return false;
+                }
+
+                const usuarioLogado = JSON.parse(usuarioStorage);
+                if (!usuarioLogado || !usuarioLogado.admin) {
+                    redirecionarParaLogin();
+                    return false;
+                }
+                return true;
+            } catch (e) {
+                console.error("Erro ao verificar usuário:", e);
+                redirecionarParaLogin();
+                return false;
             }
-        } catch (e) {
-            console.error("Erro ao ler dados do localStorage:", e);
         }
 
-        if (!usuarioLogado || !usuarioLogado.admin) {
+        function redirecionarParaLogin() {
             alert("Acesso negado. Apenas administradores podem acessar esta página.");
             window.location.href = "index.html";
-        } else {
-            carregarUsuarios();
         }
 
+        // Carregar usuários
         async function carregarUsuarios() {
+            if (!verificarAdmin()) return;
+
             try {
-                const res = await fetch(`${BASE_URL}/usuarios`);
-                const usuarios = await res.json();
+                const response = await fetch(`${BASE_URL}/usuarios`);
 
-                container.innerHTML = "";
-
-                usuarios.forEach(usuario => {
-                    const card = document.createElement("div");
-                    card.className = "bg-white p-4 shadow-md rounded flex justify-between items-center";
-
-                    card.innerHTML = `
-        <div>
-          <p><strong>ID:</strong> ${usuario.id}</p>
-          <p><strong>Email:</strong> ${usuario.email}</p>
-          <p><strong>Admin:</strong> ${usuario.admin ? "Sim" : "Não"}</p>
-        </div>
-        <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onclick="excluirUsuario(${usuario.id})">
-          Excluir
-        </button>
-      `;
-
-                    container.appendChild(card);
-                });
-            } catch (err) {
-                container.innerHTML = "<p class='text-red-500'>Erro ao carregar usuários.</p>";
-                console.error("Erro:", err);
-            }
-        }
-
-        async function excluirUsuario(id) {
-            const confirmar = confirm(`Tem certeza que deseja excluir o usuário com ID ${id}?`);
-
-            if (confirmar) {
-                try {
-                    const res = await fetch(`${BASE_URL}/usuarios/${id}`, {
-                        method: "DELETE"
-                    });
-
-                    if (res.ok) {
-                        alert("Usuário excluído com sucesso!");
-                        carregarUsuarios();
-                    } else {
-                        alert("Erro ao excluir usuário.");
-                    }
-                } catch (err) {
-                    alert("Erro na conexão com o servidor.");
-                    console.error("Erro:", err);
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
                 }
+
+                const usuarios = await response.json();
+
+                if (!Array.isArray(usuarios)) {
+                    throw new Error("Dados recebidos não são uma lista de usuários");
+                }
+
+                exibirUsuarios(usuarios);
+            } catch (err) {
+                console.error("Erro ao carregar usuários:", err);
+                container.innerHTML = `
+                    <p class='text-red-500'>Erro ao carregar usuários: ${err.message}</p>
+                    <button onclick="carregarUsuarios()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">
+                        Tentar novamente
+                    </button>
+                `;
             }
         }
+
+        function exibirUsuarios(usuarios) {
+            container.innerHTML = "";
+
+            if (usuarios.length === 0) {
+                container.innerHTML = "<p class='text-gray-500'>Nenhum usuário cadastrado.</p>";
+                return;
+            }
+
+            usuarios.forEach(usuario => {
+                const card = document.createElement("div");
+                card.className = "bg-white p-4 shadow-md rounded flex justify-between items-center";
+                card.innerHTML = `
+                    <div>
+                        <p><strong>ID:</strong> ${usuario.id}</p>
+                        <p><strong>Nome:</strong> ${usuario.nome || 'Não informado'}</p>
+                        <p><strong>Email:</strong> ${usuario.email}</p>
+                        <p><strong>Admin:</strong> ${usuario.admin ? "Sim" : "Não"}</p>
+                    </div>
+                    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onclick="excluirUsuario(${usuario.id})">
+                        Excluir
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Excluir usuário
+        async function excluirUsuario(id) {
+            if (!verificarAdmin()) return;
+
+            if (!confirm(`Tem certeza que deseja excluir o usuário com ID ${id}?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${BASE_URL}/usuarios/${id}`, {
+                    method: "DELETE"
+                });
+
+                if (response.ok) {
+                    alert("Usuário excluído com sucesso!");
+                    await carregarUsuarios();
+                } else {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.message || "Erro ao excluir usuário");
+                }
+            } catch (err) {
+                console.error("Erro ao excluir usuário:", err);
+                alert(`Falha ao excluir usuário: ${err.message}`);
+            }
+        }
+
+        // Iniciar
+        document.addEventListener('DOMContentLoaded', carregarUsuarios);
     </script>
 </body>
 
