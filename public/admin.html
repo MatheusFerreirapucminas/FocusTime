@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Visualizar Usuários</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use a versão minificada do Tailwind para produção -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
 </head>
 
 <body class="bg-gray-100 p-6">
@@ -60,17 +61,19 @@
                         <p><strong>Nome:</strong> ${usuario.nome || 'Não informado'}</p>
                         <p><strong>Email:</strong> ${usuario.email}</p>
                     </div>
-                    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onclick="excluirUsuario(${usuario.id}, event)">
+                    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" data-user-id="${usuario.id}">
                         Excluir
                     </button>
                 `;
+
+                const deleteBtn = card.querySelector('button');
+                deleteBtn.addEventListener('click', () => excluirUsuario(usuario.id));
+
                 container.appendChild(card);
             });
         }
 
-        async function excluirUsuario(id, event) {
-            event.preventDefault();
-            
+        async function excluirUsuario(id) {
             if (!confirm(`Tem certeza que deseja excluir o usuário com ID ${id}?`)) {
                 return;
             }
@@ -93,8 +96,8 @@
             }
         }
 
-        // Iniciar
         document.addEventListener('DOMContentLoaded', carregarUsuarios);
     </script>
 </body>
+
 </html>
