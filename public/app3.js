@@ -277,7 +277,7 @@ function carregarEventos() {
                 document.querySelectorAll(".editar-btn").forEach((btn) => {
                     btn.addEventListener("click", () => {
                         const id = btn.getAttribute("data-id");
-                        window.location.href = `CriarEvento.html?id=${id}`;
+                        window.location.href = `criarevento.html?id=${id}`;
                     });
                 });
             } else {
